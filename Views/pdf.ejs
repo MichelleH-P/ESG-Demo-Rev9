@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="../public/pdf.css" />
+  </head>
+  <body>
+    <h1>My First Heading</h1>
+
+    <h1 class="maintitle">Export pdf</h1>
+    <label for="">Name: </label><input type="text" value="" id="dname" />
+    <div class="wrapper">
+      <label id="ldpt">Place: </label
+      ><input type="text" id="indpt" value="" /><br />
+      <label id="lpty">Place Types: </label
+      ><input type="text" id="inpty" value="" /><br />
+      <h1 class="dentryfor" id="tlt">
+        My Entry For <span><input type="text" id="inprod" value="" /></span>
+      </h1>
+      <div class="dtentry">
+        <fieldset>
+          <label id="lsdesc">Small Title: </label><br /><input
+            type="text"
+            id="insdesc"
+            value=""
+          /><br />
+          <label id="lwtlt">Long Title: </label><br /><input
+            type="text"
+            id="inwtlt"
+            value=""
+          /><br />
+          <label id="lhbd">Options Description: </label><br />
+          <input type="text" id="inhbd0" value="" /><br />
+          <input type="text" id="inhbd1" value="" /><br />
+          <input type="text" id="inhbd2" value="" /><br />
+          <input type="text" id="inhbd3" value="" /><br />
+          <input type="text" id="inhbd4" value="" /><br />
+        </fieldset>
+        <fieldset>
+          <label id="ldex">Options Examples: </label><br />
+          <input type="text" id="index0" value="" /><br />
+          <input type="text" id="index1" value="" /><br />
+          <input type="text" id="index2" value="" /><br />
+          <label id="lwex">Long Example: </label><br />
+          <input type="text" id="inwex0" value="" /><br />
+          <input type="text" id="inwex1" value="" /><br />
+          <input type="text" id="inwex2" value="" /><br />
+          <label id="lhbdex">Options Example: </label><br />
+          <input type="text" id="inhbdex0" value="" /><br />
+          <input type="text" id="inhbdex1" value="" /><br />
+          <input type="text" id="inhbdex2" value="" /><br />
+          <input type="text" id="inhbdex3" value="" /><br />
+          <input type="text" id="inhbdex4" value="" /><br />
+        </fieldset>
+      </div>
+      <!-- Data entry End -->
+      <div class="redinfo"></div>
+    </div>
+    <br />
+    <div class="cbtn">
+      <a class="btnexp" href="javascript:pdfexport();">Export PDF</a>
+      <a class="btnexp" href="javascript:inputClear();">Clear fields</a>
+    </div>
+  </body>
+</html>

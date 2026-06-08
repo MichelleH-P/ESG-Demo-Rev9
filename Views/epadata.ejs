@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>ESG Module</title>
+    <link rel="stylesheet" type="text/css" href="/Public/Assets/main menu.css" />
+
+    <style>
+      /* Basic styling */
+      img {
+        width: 500px; /* picture size */
+        border-radius: 10px; /* circular border radius */
+        /* float: left; / place image next to text */
+        margin-right: 10px; /* create space after image */
+      } /* reference image */
+
+      .img1 {
+        width: 500px; /* picture size */
+        border-radius: 10px; /* circular boarder radius */
+        float: left; /* place image next to text */
+        margin-right: 100px; /* create space after image */
+        margin-left: 100px; /* create space before image */
+      } /* reference image */
+      p.title {
+        font-family: Arial, sans-serif;
+        font-weight: bold; /* bold font only for p user class */
+        margin-top:20px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 42px;
+        font-weight: bold;
+      }
+
+      /* Basic styling */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0px;
+        
+        /* margin-left: auto; */
+        /* margin-right: auto; */
+        /* justify-content: center */
+        /* background-color: #f4f4f4; */
+      }
+
+      /* Initial button style */
+      .styled-button {
+        background-color: #28a745; /* Green background */
+        color: white; /* White text */
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease; /* Smooth transition */
+    }
+    
+    /* Hover effect */
+    .styled-button:hover {
+        background-color: #6c757d; /* Gray background on hover */
+    }
+    </style>
+  </head>
+  <body>
+    <div class="banner"></div>
+      <img src="../public/Thumbnails/logo.png" alt="image unavailable" />
+      <nav>
+        <ul>
+          <li><a href="/users/dashboard">Dashboard</a></li>
+          <li><a href="/users/epadata" class="active">EPA Data</a></li>
+          <li><a href="/users/esgmodules">ESG Module</a></li>
+          <li><a href="/users/documentation">Documentation</a></li>
+          <li><a href="/users/runstatus">Run Status</a></li>
+          <li><form action="/users/logout" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" style="align-items: left; padding: 10px 10px; font-weight: bold;">Log out</button>
+           </form></li>
+        </ul>
+      </nav>
+    </div>
+
+    <p class="title">EPA Data</p>
+
+    <br><br>
+
+    <div style="float: left; margin-left: 42%; margin-bottom: 10px;">
+        <iframe 
+            src="https://btexeliminator.net/unit_outputs.php" 
+            width="100%" 
+            height="800px" 
+            style="border:none;">
+        </iframe>
+    </div>
+
+    <button id="toggle-button" style="margin-right: 800px; margin-left: 800px;">Show Output</button>
+
+    <form action="unit_outputs.php" method="POST" style="text-align: left;" id="iframe-container" >
+      <div style="float: left; margin-left: 20%; margin-bottom: 10px;">
+        <h3>Input:</h3>
+        Volume (MMSCFD, max: 200):
+        <INPUT TYPE="text" VALUE="0" size="10" maxlength="10" NAME="volume" />
+        <BR />
+
+        Inlet Pressure (PSIG):
+        <SELECT NAME="inlet_PSIG">
+          <OPTION VALUE="400">400</OPTION>
+          <OPTION VALUE="600">600</OPTION>
+          <OPTION VALUE="800">800</OPTION>
+          <OPTION VALUE="1000">1000</OPTION>
+        </SELECT>
+        <BR />
+
+        Inlet Temperature (F):
+        <INPUT TYPE="text" VALUE="0" size="10" maxlength="10" NAME="inlet_temp" />
+        <BR />
+
+        Water Content (Lbs/MMSCF):
+        <BR />
+
+        Pipeline Spec (Lbs/MMSCF):
+        <INPUT
+          TYPE="text"
+          VALUE="0"
+          size="10"
+          maxlength="10"
+          NAME="pipeline_spec"
+        />
+        <BR />
+
+        Water Removed (Lbs/MMSCF): 0
+        <BR />
+
+        Water Removed (Lbs/day): 0
+        <BR />
+
+        Glycol Circ (gal / lb water):
+        <INPUT
+          TYPE="text"
+          VALUE="0"
+          size="10"
+          maxlength="10"
+          NAME="glycol_circ"
+        />
+        <BR />
+
+        Glycol Circ (gal/day): 0
+        <BR />
+
+        Glycol Circ (gal/hour): 0
+        <BR />
+
+        Kimray Pump Volume (SCFH):
+
+        <BR />
+
+        Kimray Pump Model:
+
+        <BR />
+
+        Electric Pump Emission Rate (SCFH/gal circ):
+        <INPUT
+          TYPE="text"
+          VALUE="0"
+          size="10"
+          maxlength="10"
+          NAME="electric_pump_emission_rate"
+        />
+        <BR />
+
+        Electric Pump Volume (SCFH): 0
+        <BR />
+
+        Estimated Reboiler Heat Duty (BTU/hr): 0
+        <BR />
+
+        Sized Reboiler (BTU/hr):
+        <BR />
+
+        Capacity Utilization (%): 0%
+        <BR />
+
+        Fuel heating value (BTU/SCF):
+        <INPUT
+          TYPE="text"
+          VALUE="0"
+          size="10"
+          maxlength="10"
+          NAME="fuel_heating_value"
+        />
+        <BR />
+
+        Burner Thermal Efficiency (%):
+        <INPUT
+          TYPE="text"
+          VALUE="0"
+          size="10"
+          maxlength="10"
+          NAME="burner_thermal_efficiency"
+        />%
+
+        <br><br>
+
+        <INPUT TYPE="submit" NAME="calc" VALUE="Calculate" class="styled-button"/>
+      </div>
+      
+      <div style="float: right; margin-right: 20%">
+        <h3>Results:</h3>
+
+        Fuel Required (SCFH): 0
+        <BR />
+        Kimray - Flash Generated (SCFH): 0
+        <BR />
+        Kimray - Flash Generated (MSCFD): 0
+        <BR />
+        Kimray - Flash Generated (MSCF/Year): 0
+        <BR />
+        Electric Pump - Flash Generated (SCFH): 0
+        <BR />
+        Electric Pump - Flash Generated (MSCFD): 0
+        <BR />
+        Electric Pump - Flash Generated (MSCF/Year): 0
+      </div>
+
+      <BR /><br>
+    </form><br><br>
+
+    <script>
+        const toggleButton = document.getElementById('toggle-button');
+        const iframeContainer = document.getElementById('iframe-container');
+
+        toggleButton.addEventListener('click', () => {
+            if (iframeContainer.style.display === 'none') {
+                iframeContainer.style.display = 'block';
+                toggleButton.textContent = 'Hide Output';
+            } else {
+                iframeContainer.style.display = 'none';
+                toggleButton.textContent = 'Show Output';
+                
+            }
+        });
+    </script>
+  </body>
+</html>

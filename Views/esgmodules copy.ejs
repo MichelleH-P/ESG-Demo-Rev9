@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>ESG Module</title>
+    <link
+      href="/Public/assets/main menu.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <style>
+      /* Basic styling */
+      img {
+        width: 500px; /* picture size */
+        border-radius: 10px; /* circular border radius */
+        /* float: left; / place image next to text */
+        margin-right: 10px; /* create space after image */
+      } /* reference image */
+
+      .img1 {
+        width: 500px; /* picture size */
+        border-radius: 10px; /* circular boarder radius */
+        float: left; /* place image next to text */
+        margin-right: 100px; /* create space after image */
+        margin-left: 100px; /* create space before image */
+      } /* reference image */
+      p.title {
+        font-family: Arial, sans-serif;
+        font-weight: bold; /* bold font only for p user class */
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 42px;
+        font-weight: bold;
+      }
+
+      /* Basic styling */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0px;
+        /* background-color: #f4f4f4; */
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      select {
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        color: white;
+        background-color: rgb(26, 160, 59);
+      }
+
+      .content {
+        padding: 20px;
+        background-color: white;
+        /* border: 1px solid #ddd; */
+        border-radius: 5px;
+        margin-bottom: 50px;
+        border-radius: 5px;
+      }
+
+      .bottom-dropdown {
+        margin-top: 50px;
+        padding: 20px;
+        background-color: #e8e8e8;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        bottom: 20px;
+        width: 100%;
+        left: 0;
+        box-sizing: border-box;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner">
+      <img src="../Public/Thumbnails/logo.png" alt="image unavailable" />
+      <nav>
+        <ul>
+          <li><a href="/users/dashboard">Dashboard</a></li>
+          <li><a href="/users/epadata">EPA Data</a></li>
+          <li>
+            <a href="/users/esgmodule" class="active">ESG Module</a>
+          </li>
+          <li><a href="/users/runstatus">Run Status</a></li>
+          <li>
+            <form action="/users/logout" method="POST">
+              <input type="hidden" name="_method" value="DELETE" />
+              <button
+                type="submit"
+                style="align-items: left; padding: 10px 10px; font-weight: bold"
+              >
+                Log out
+              </button>
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <p class="title">ESG Module</p>
+    <br />
+    <img
+      src="../Public/Thumbnails/Gauge.png"
+      class="img1"
+      alt="image unavailable"
+    />
+
+    <!-- Content displayed at the top -->
+    <div id="topContent" class="content">
+      <p>
+        Content will be displayed here based on your selection from the dropdown
+        at the bottom of the page.
+      </p>
+    </div>
+
+    <!-- Drop-down list at the bottom of the page -->
+    <div class="bottom-dropdown">
+      <label for="contentSelect">Choose a topic:</label>
+      <select id="contentSelect">
+        <option value="" selected disabled>Select an option...</option>
+        <option value="option1">BTEX Table</option>
+        <option value="option2">Sample Table</option>
+        <option value="option3">Temperature vs Time</option>
+        <option value="option4">Dummy Table 1</option>
+        <option value="option5">Dummy Table 2</option>
+        <option value="option6">Dummy Table 3</option>
+        <option value="option7">QR Code 1</option>
+        <option value="option8">QR Code 2</option>
+      </select>
+    </div>
+
+    <script>
+      // Get references to the select element and the top content container
+      const contentSelect = document.getElementById("contentSelect");
+      const topContent = document.getElementById("topContent");
+
+      // Function to change content at the top based on the selected option
+      contentSelect.addEventListener("change", function () {
+        const selectedValue = this.value;
+
+        let content = ""; // Content to display
+
+        if (selectedValue === "option1") {
+          content = `
+          <h2>BTEX Table</h2>
+          <br />
+          <iframe
+            src="https://btexeliminator.net/MOXA_report.php"
+            width="60%"
+            height="600"
+            style="border: none"
+            font-family: Arial, sans-serif;
+          ></iframe>
+          <p>Welcome to our website! We are a company that values excellence and innovation. Our mission is to provide top-notch services to our clients.</p>
+
+          `;
+        } else if (selectedValue === "option2") {
+          content = `
+          <h2>Sample Table</h2>
+          <br />
+          <h1>Sample Table</h1>
+
+          <h2>Random 4x5 Table</h2>
+
+          <table>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+            <th>Header 4</th>
+            <th>Header 5</th>
+            </tr>
+            <tr>
+            <td>500</td>
+            <td>24</td>
+            <td>3</td>
+            <td>18</td>
+            <td>7</td>
+            </tr>
+            <tr>
+            <td>5</td>
+            <td>12</td>
+            <td>29</td>
+            <td>9</td>
+            <td>15</td>
+            </tr>
+            <tr>
+            <td>8</td>
+            <td>14</td>
+            <td>17</td>
+            <td>6</td>
+            <td>23</td>
+            </tr>
+            <tr>
+            <td>21</td>
+            <td>4</td>
+            <td>19</td>
+            <td>11</td>
+            <td>16</td>
+            </tr>
+            </table>
+            <br />
+            <a href="../Tables/tables Index.html">Tables Index</a>
+            <br />
+            <a href="../home.html">Home</a>
+          
+          <ul>
+            <li>Web Design and Development</li>
+            <li>Mobile App Development</li>
+            <li>SEO and Digital Marketing</li>
+            <li>Cloud Solutions</li>
+          </ul>
+        `;
+        } else if (selectedValue === "option3") {
+          content = `
+          <iframe
+            src="/Public/ESG Tables/temperature vs time"
+            width="60%"
+            height="800"
+            style="border: none"
+          ></iframe>
+        `;
+        } else if (selectedValue === "option4") {
+          content = `
+          <iframe
+            src="../Tables/dummy table.html"
+            width="60%"
+            height="800"
+            style="border: none"
+          ></iframe>
+        `;
+        } else if (selectedValue === "option5") {
+          content = `
+          <iframe
+            src="../Tables/dummy table2.html"
+            width="60%"
+            height="800"
+            style="border: none"
+          ></iframe>
+        `;
+        } else if (selectedValue === "option6") {
+          content = `
+          <iframe
+            src="../Tables/dummy table3.html"
+            width="60%"
+            height="800"
+            style="border: none"
+          ></iframe>
+        `;
+        } else if (selectedValue === "option7") {
+          content = `
+          <iframe
+            src="Node_Login/Public/ESG modules/document_upload_test"
+            width="60%"
+            height="800"
+            style="border: none"
+          ></iframe>
+        `;
+        } else if (selectedValue === "option8") {
+          content = `
+            <form action="document_upload_test.php" method="POST" enctype="multipart/form-data">
+              Unit Serial Number:
+              <input type="text" value="" size="10" maxlength="10" name="serial_number">
+              <br>
+              Customer:
+              <select name="cust_id">
+                  <option value="SPXC000" selected="">SpiralX</option>
+                  <option value="ENG">Engineering</option>
+                  <option value="DemoSite">Demo Site</option>
+              </select>
+              <br>
+              Label: <input type="text" name="label" size="40">
+              <br>
+              Location: <input type="text" id="location" name="location" value="" size="43">
+              <br>
+              File: <input type="file" name="doc">
+              <br>
+                    <br>
+              <input type="submit" name="update" value="Upload">
+              <input type="checkbox" name="no_upload">
+              Delete without uploading
+              <br>
+              Upload Status: 
+              <br>
+        </form>
+
+        `;
+        }
+
+        // Update the content at the top of the page
+        topContent.innerHTML = content;
+      });
+    </script>
+  </body>
+</html>

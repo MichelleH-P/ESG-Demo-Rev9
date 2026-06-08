@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Run Status</title>
+    <link rel="stylesheet" type="text/css" href="/Public/Assets/main menu.css" />
+    <link href= "/Public/assets/main menu.css" rel="stylesheet" type="text/css" />
+    <!-- <script defer src="/js/auth.js"></script> -->
+    <!-- <script defer src="/init.js"></script> -->
+
+    <style>
+        /* Basic styling */
+        img {
+          width: 500px; /* picture size */
+          border-radius: 10px; /* circular border radius */
+          /* float: left; / place image next to text */
+          margin-right: 10px; /* create space after image */
+        } /* reference image */
+  
+        .img1 {
+          width: 500px; /* picture size */
+          border-radius: 10px; /* circular boarder radius */
+          float: left; /* place image next to text */
+          margin-right: 100px; /* create space after image */
+          margin-left: 100px; /* create space before image */
+        } /* reference image */
+        p.title {
+          font-family: Arial, sans-serif;
+          font-weight: bold; /* bold font only for p user class */
+          margin-top:20px;
+          margin-bottom: 20px;
+          text-align: center;
+          font-size: 50px;
+          font-weight: bold;
+        }
+  
+        /* Basic styling */
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0px;
+          /* background-color: #f4f4f4; */
+        }
+  
+        h1 {
+          color: #333;
+        }
+  
+        select {
+          padding: 10px;
+          font-size: 16px;
+          margin-bottom: 20px;
+          color: rgb(0, 0, 0);
+          background-color: rgb(235, 243, 237);
+        }
+  
+        .content {
+          padding: 20px;
+          background-color: white;
+          /* border: 1px solid #ddd; */
+          border-radius: 5px;
+          margin-bottom: 50px;
+          border-radius: 5px;
+        }
+
+        .table-container {
+          width: 70%; /* Makes it smaller than the page */
+          max-height: 900px;
+          overflow-y: auto;
+          margin: auto;
+          margin-right: 5%;
+          margin-left: 2%;
+          float: right;
+      }
+
+      table {
+          width: 100%;
+          border-collapse: collapse;
+      }
+      th, td {
+          padding: 8px;
+          text-align: left;
+          border: 1px solid #ddd;
+      }
+      th {
+          background-color: #f4f4f4;
+      }
+      /* Sticky first 2 columns */
+      td:first-child, td:nth-child(2),
+      th:first-child, th:nth-child(2) {
+          position: sticky;
+          left: 0;
+          background-color: #ffffff;
+          z-index: 1;
+      }
+      td:nth-child(2), th:nth-child(2) {
+          left: 100px;
+      }
+      /* Make the first row sticky */
+      thead th {
+        position: sticky;
+        top: 0;
+        background-color: #f4f4f4;
+        z-index: 2;
+    }
+      /* First 2 columns wider */
+      td:first-child, th:first-child {
+          width: 150px;
+      }
+      td:nth-child(2), th:nth-child(2) {
+          width: 200px;
+      }
+
+      .container {
+            display: flex;
+            max-width: 100%;
+            margin-left: 10%;
+        }
+        .scrollable-list {
+            max-height: 900px;
+            overflow-y: auto;
+            width: 20%;
+            border-right: 1px solid #ddd;
+        }
+        .scrollable-list a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            background-color: #f4f4f4;
+            margin-bottom: 5px;
+            color: black;
+            cursor: pointer;
+        }
+        .scrollable-list a:hover {
+            background-color: #ddd;
+        }
+        .hidden {
+          display: none;
+      }
+      /* Highlighting Yes/No fields */
+      td.highlight-yes {
+        background-color: green;
+        color: white;
+    }
+    td.highlight-no {
+        background-color: red;
+        color: white;
+    }
+    .scroll-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      background-color: #ddd;
+      padding: 5px;
+  }
+  .left-arrow {
+      left: 0;
+  }
+  .right-arrow {
+      right: 0;
+  }
+  .Yes {
+    background-color: green;
+    color: white;
+  }
+  .No {
+      background-color: red;
+      color: white;
+  }
+      </style>
+  </head>
+
+  <body>
+    <div class="banner"></div>
+    <img src="../public/Thumbnails/logo.png" alt="image unavailable" />
+      <nav>
+        <ul>
+          <li><a href="/users/dashboard">Dashboard</a></li>
+          <li><a href="/users/epadata">EPA Data</a></li>
+          <li><a href="/users/esgmodules">ESG Module</a></li>
+          <li><a href="/users/runstatus" class="active">Run Status</a></li>
+          <li><form action="/users/logout" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" style="align-items: left; padding: 10px 10px; font-weight: bold;">Log out</button>
+           </form></li>
+        </ul>
+      </nav>
+    </div>
+
+    <p class="title" style="float:center;">Run Status</p>
+  
+  <div class="container">
+        <!-- Scrollable List -->
+        <div class="scrollable-list">
+            <a onclick="showTable('table0')">Nothing Selected</a>
+            <a onclick="showTable('table1')">MIG-1</a>
+            <a onclick="showTable('table2')">MIG-2</a>
+            <a onclick="showTable('table3')">MIG-3</a>
+            <a onclick="showTable('table4')">MIG-4</a>
+            <a onclick="showTable('table5')">MIG-5</a>
+            <a onclick="showTable('table6')">MIG-6</a>
+            <a onclick="showTable('table7')">MIG-7</a>
+        </div>
+
+        <!-- Table and Image Display -->
+        <div class="table-container">
+          <!-- Table 0 -->
+          <div id="table0" >
+            <h1>Please select a Unit</h1>
+            
+            <div style="float: right; margin-right: 30%; padding: 10px 10px;">
+              <h3>Pump 1</h3>
+              <img src="../public/Thumbnails/grey.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+            </div>
+            <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+              <h3>Pump 2</h3>
+              <img src="../public/Thumbnails/grey.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+            </div>
+            <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+              <h3>Bypass</h3>
+              <img src="../public/Thumbnails/grey.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+            </div>
+          </div>
+          
+          <!-- Table 1 -->
+            <div id="table1" class="hidden">
+              <h1>MIG-1</h1>
+
+              <div style="float: right; margin-right: 30%; padding: 10px 10px;">
+                <h3>Pump 1</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+              <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+                <h3>Pump 2</h3>
+                <img src="../public/Thumbnails/green.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+              <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+                <h3>Bypass</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+
+              <div id="Main_table" class="data-table"></div>
+              
+            </div>
+            
+            <!-- Table 2 -->
+            <div id="table2" class="hidden">
+              <h1>MIG-2</h1>
+
+              <div style="float: right; margin-right: 30%; padding: 10px 10px;">
+                <h3>Pump 1</h3>
+                <img src="../public/Thumbnails/green.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+              <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+                <h3>Pump 2</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+              <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+                <h3>Bypass</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+
+              <div id="Main_table" class="data-table"></div>
+            </div>
+
+            <!-- Table 3 -->
+            <div id="table3" class="hidden">
+              <h1>MIG-3</h1>
+
+              <div style="float: right; margin-right: 30%; padding: 10px 10px;">
+                <h3>Pump 1</h3>
+                <img src="../public/Thumbnails/green.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+              <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+                <h3>Pump 2</h3>
+                <img src="../public/Thumbnails/green.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+              <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+                <h3>Bypass</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+
+              <div id="Main_table" class="data-table"></div>
+            </div>
+
+            <!-- Table 4 -->
+            <div id="table4" class="hidden">
+              <h1>MIG-4</h1>
+
+              <div style="float: right; margin-right: 30%; padding: 10px 10px;">
+                <h3>Pump 1</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+              <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+                <h3>Pump 2</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+              <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+                <h3>Bypass</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+
+              <table class="data-table" id="data-table">
+                    <tr><th>MIG-4 Column 1</th><th>MIG-4 Column 2</th></tr>
+                    <tr><td>Data 4-1</td><td>Data 4-2</td></tr>
+                    <tr><td>Data 4-3</td><td>Data 4-4</td></tr>
+                    <tr><td>Data 4-3</td><td>Yes</td></tr>
+                </table>
+            </div>
+
+            <!-- Table 5 -->
+            <div id="table5" class="hidden">
+              <h1>MIG-5</h1>
+
+              <div style="float: right; margin-right: 30%; padding: 10px 10px;">
+                <h3>Pump 1</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+              <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+                <h3>Pump 2</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+              <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+                <h3>Bypass</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+
+              <div id="Main_table" class="data-table"></div>
+              
+            </div>
+
+            <!-- Table 6 -->
+            <div id="table6" class="hidden">
+              <h1>MIG-6</h1>
+
+              <div style="float: right; margin-right: 30%; padding: 10px 10px;">
+                <h3>Pump 1</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+              <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+                <h3>Pump 2</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+              <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+                <h3>Bypass</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+
+              <table id="data-table">
+                  <thead>
+                      <tr>
+                          <th>Header 1</th>
+                          <th>Header 2</th>
+                          <th>Header 3</th>
+                          <th>Header 4</th>
+                          <th>Header 5</th>
+                          <th>Header 6</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr><td>Row 1 Data 1</td><td>Row 1 Data 2</td><td>Row 1 Data 3</td><td>Row 1 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 2 Data 1</td><td>Row 2 Data 2</td><td>Row 2 Data 3</td><td>Row 2 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>Row 3 Data 2</td><td>Row 3 Data 3</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>Row 3 Data 2</td><td>Row 3 Data 3</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>Row 3 Data 2</td><td>Row 3 Data 3</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>Row 3 Data 2</td><td>Row 3 Data 3</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>Row 3 Data 2</td><td>Row 3 Data 3</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>Row 3 Data 2</td><td>Row 3 Data 3</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>Row 3 Data 2</td><td>Row 3 Data 3</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>Row 3 Data 2</td><td>Row 3 Data 3</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>Row 3 Data 2</td><td>Row 3 Data 3</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>Row 3 Data 2</td><td>Row 3 Data 3</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>Row 3 Data 2</td><td>Row 3 Data 3</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>Row 3 Data 2</td><td>Row 3 Data 3</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>Row 3 Data 2</td><td>Yes</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>Row 3 Data 2</td><td>Row 3 Data 3</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>No</td><td>Row 3 Data 3</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+                      <tr><td>Row 3 Data 1</td><td>Row 3 Data 2</td><td>Row 3 Data 3</td><td>Row 3 Data 4</td><td>Row 1 Data 4</td><td>Row 3 Data 4</td></tr>
+
+                  </tbody>
+              </table>          
+            </div>
+
+            <!-- Table 7 -->
+            <div id="table7" class="hidden" id="table-container">
+              <h1>MIG-7</h1>
+
+              <div style="float: right; margin-right: 30%; padding: 10px 10px;">
+                <h3>Pump 1</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+              <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+                <h3>Pump 2</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+              <div style="float: right; margin-right: 5%; padding: 10px 10px;">
+                <h3>Bypass</h3>
+                <img src="../public/Thumbnails/red.png"  alt="status unavailable" style="height: 100px; width: 100px;" />
+              </div>
+
+              <div id="Main_table" class="data-table"></div>
+              </div>
+              
+        </div>
+    </div>
+
+    <script>
+        function showTable(tableId) {
+            // Hide all tables
+            const tables = document.querySelectorAll('.table-container > div');
+            tables.forEach(table => table.classList.add('hidden'));
+
+            // Show selected table
+            const selectedTable = document.getElementById(tableId);
+            if (selectedTable) {
+                selectedTable.classList.remove('hidden');
+            }
+        }
+
+      // JavaScript to highlight fields
+      document.querySelectorAll('#data-table tbody td').forEach(cell => {
+        if (cell.innerText === 'Yes') {
+            cell.classList.add('highlight-yes');
+        } else if (cell.innerText === 'No') {
+            cell.classList.add('highlight-no');
+        }
+      });
+      document.querySelectorAll('#main-table tbody td').forEach(cell => {
+        if (cell.innerText === 'Yes') {
+            cell.classList.add('highlight-yes');
+        } else if (cell.innerText === 'No') {
+            cell.classList.add('highlight-no');
+        }
+      });
+
+    </script>
+
+    <script>
+      // Load the table using AJAX
+      fetch("/Public/tables/MOXA_report.ejs")
+        .then((response) => response.text())
+        .then(
+          (data) => (document.getElementById("Main_table").innerHTML = data)
+        );
+    </script>
+  </body>
+</html>
+

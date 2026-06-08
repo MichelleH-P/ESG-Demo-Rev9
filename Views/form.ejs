@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alarm Monitoring Dashboard</title>
+    <style>
+      /* Sidebar Styling */
+      .table-list {
+        list-style-type: none;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        float: left;
+        margin-left: 5%;
+      }
+      .table-list li {
+        padding: 10px;
+        background-color: #f4f4f4;
+      }
+      .table-list li:hover {
+        background-color: grey;
+      }
+      .table-list li.selected {
+        background-color: green;
+        color: white;
+      }
+
+      /* Table Styling */
+      .table-container {
+        max-height: 500px;
+        overflow: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+      th.sticky,
+      td.sticky-col {
+        position: sticky;
+        background: #fff;
+        z-index: 1;
+      }
+      th.sticky {
+        top: 0;
+      }
+      td.sticky-col {
+        left: 0;
+        background: #f0f0f0;
+      }
+      /* Styling for the table container and display */
+      .table-container {
+        width: 70%;
+        height: 800px;
+        overflow: auto;
+        margin-top: 20px;
+        overflow-y: auto;
+        float: right;
+        margin-right: 5%;
+      }
+      .imageContainer {
+        margin-left: 2%;
+        width: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Alarm Monitoring Dashboard</h2>
+    <div>
+      <ul class="table-list">
+        <li data-table="MIG-1">MIG-1</li>
+        <li data-table="MIG-2">MIG-2</li>
+        <li data-table="MIG-3">MIG-3</li>
+        <li data-table="MIG-4">MIG-4</li>
+        <li data-table="MIG-5">MIG-5</li>
+        <li data-table="MIG-6">MIG-6</li>
+      </ul>
+    </div>
+    <div id="image-container" style="float: right; margin-right: 30%">
+      <h3>Pump 1</h3>
+      <img
+        id="pump1Alarm-image"
+        src="/Public/Thumbnails/grey.png"
+        alt="Alarm Image"
+        class="imageContainer"
+      />
+    </div>
+
+    <div id="image-container" style="float: right; margin-right: 2%">
+      <h3>Pump 2</h3>
+      <img
+        id="pump2Alarm-image"
+        src="/Public/Thumbnails/grey.png"
+        alt="Alarm Image"
+        class="imageContainer"
+      />
+    </div>
+
+    <div id="image-container" style="float: right; margin-right: 2%">
+      <h3>Bypass</h3>
+      <img
+        id="bypassAlarm-image"
+        src="/Public/Thumbnails/grey.png"
+        alt="Alarm Image"
+        class="imageContainer"
+      />
+    </div>
+
+    <div id="table-container" class="table-container"></div>
+
+    <script>
+      document.querySelectorAll(".table-list li").forEach((item) => {
+        item.addEventListener("click", function () {
+          document
+            .querySelectorAll(".table-list li")
+            .forEach((el) => el.classList.remove("selected"));
+          this.classList.add("selected");
+          const tableId = this.getAttribute("data-table");
+
+          // Load the CSV and display the image
+          loadTable(`/Public/Tables/${tableId}.csv`);
+        });
+      });
+
+      function loadTable(csvPath) {
+        fetch(csvPath)
+          .then((response) => response.text())
+          .then((data) => {
+            const rows = data.split("\n").map((row) => row.split(","));
+            const table = document.createElement("table");
+            let alarmType = "";
+
+            rows.forEach((row, rowIndex) => {
+              const tr = document.createElement("tr");
+              row.forEach((cell, cellIndex) => {
+                const cellElem = document.createElement(
+                  rowIndex === 0 ? "th" : "td"
+                );
+                cellElem.textContent = cell;
+
+                // Sticky header and columns
+                if (rowIndex === 0) cellElem.classList.add("sticky");
+                if (cellIndex === 0) cellElem.classList.add("sticky-col");
+
+                console.log(rowIndex);
+
+                // Highlight specific alarms
+                if (cell === "TK-900 Low Level Alarm") {
+                  cellElem.style.backgroundColor = "yellow";
+                  alarmType = "TK-900 Low Level Alarm";
+                  console.log(alarmType);
+                } else if (cell === "Customer ESD Contact Alarm") {
+                  alarmType = "Customer ESD Contact Alarm";
+                  console.log(alarmType);
+                }
+                tr.appendChild(cellElem);
+              });
+              table.appendChild(tr);
+            });
+
+            document.getElementById("table-container").innerHTML = "";
+            document.getElementById("table-container").appendChild(table);
+
+            // Change image based on the last alarm
+            const pump1Alarm = document.getElementById("pump1Alarm-image");
+            const pump2Alarm = document.getElementById("pump2Alarm-image");
+            const bypassAlarm = document.getElementById("bypassAlarm-image");
+            if (alarmType === "Pump P-903 ON") {
+              pump1Alarm.src = "/Public/Thumbnails/green.png";
+            } else {
+              pump1Alarm.src = "/Public/Thumbnails/grey.png";
+              console.log("pump1Alarm else");
+            }
+
+            if (alarmType === "Pump P-904 ON") {
+              pump2Alarm.src = "/Public/Thumbnails/green.png";
+            } else {
+              pump2Alarm.src = "/Public/Thumbnails/grey.png";
+              console.log("pump2Alarm else");
+            }
+
+            if (alarmType === "BTEX Skid Bypass Alarm") {
+              bypassAlarm.src = "/Public/Thumbnails/green.png";
+            } else {
+              bypassAlarm.src = "/Public/Thumbnails/grey.png";
+              console.log("bypassAlarm else");
+            }
+          });
+      }
+    </script>
+  </body>
+</html>

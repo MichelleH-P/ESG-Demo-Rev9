@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>ESG Module</title>
+    <link rel="stylesheet" type="text/css" href="/Public/Assets/main menu.css" />
+
+    <style>
+      /* Basic styling */
+      img {
+        width: 500px; /* picture size */
+        border-radius: 10px; /* circular border radius */
+        /* float: left; / place image next to text */
+        margin-right: 10px; /* create space after image */
+      } /* reference image */
+
+      .img1 {
+        width: 500px; /* picture size */
+        border-radius: 10px; /* circular boarder radius */
+        float: left; /* place image next to text */
+        margin-right: 100px; /* create space after image */
+        margin-left: 100px; /* create space before image */
+      } /* reference image */
+      p.title {
+        font-family: Arial, sans-serif;
+        font-weight: bold; /* bold font only for p user class */
+        margin-top:20px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 42px;
+        font-weight: bold;
+      }
+
+      /* Basic styling */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0px;
+        
+        /* margin-left: auto; */
+        /* margin-right: auto; */
+        /* justify-content: center */
+        /* background-color: #f4f4f4; */
+      }
+
+      .centered {
+        margin: 0;
+        text-align: center;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      select {
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        color: rgb(0, 0, 0);
+        background-color: rgb(247, 247, 247);
+      }
+
+      .content {
+        /* padding: 20px; */
+        background-color: white;
+        /* border: 1px solid #ddd; */
+        /* border-radius: 5px;
+        margin-bottom: 50px;
+        border-radius: 5px; */
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        text-align: center;
+      }
+
+      .bottom-dropdown {
+        margin-top: 50px;
+        padding: 20px;
+        background-color: #e8e8e8;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        bottom: 20px;
+        width: 100%;
+        left: 0;
+        box-sizing: border-box;
+        text-align: center;
+      }
+
+    /* Table styling */
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f4f4f4;
+    }
+
+        /* Hover effect for the tabs */
+        .tab-bar button:hover {
+          background-color: #cceccc;
+      }
+      
+      input[type="text"], textarea, select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="banner"></div>
+      <img src="../public/Thumbnails/logo.png" alt="image unavailable" />
+      <nav>
+        <ul>
+          <li><a href="/users/dashboard">Dashboard</a></li>
+          <li><a href="/users/epadata">EPA Data</a></li>
+          <li><a href="/users/esgmodules" class="active">ESG Module</a></li>
+          <li><a href="/users/documentation">Documentation</a></li>
+          <li><a href="/users/runstatus">Run Status</a></li>
+          <li><form action="/users/logout" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" style="align-items: left; padding: 10px 10px; font-weight: bold;">Log out</button>
+           </form></li>
+        </ul>
+      </nav>
+    </div>
+
+    <p class="title">Documentation Generation</p>
+    <br />
+
+    <iframe src="https://btexeliminator.net/unit_documents.php" width="100%" height="1000px" style="border:none;">
+      Your browser does not support iframes. Please visit 
+      <a href="https://btexeliminator.net/unit_documents.php">this link</a>.
+    </iframe><br><br>
+    
+  </body>
+</html>

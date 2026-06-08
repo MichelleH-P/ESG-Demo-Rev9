@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dynamic Table Toggle</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .table-list {
+        list-style: none;
+        padding: 0;
+      }
+      .table-list li {
+        padding: 10px;
+        cursor: pointer;
+        background-color: #f4f4f4;
+        margin-bottom: 5px;
+      }
+      .table-list li:hover {
+        background-color: grey;
+      }
+      .table-list li.selected {
+        background-color: green;
+        color: white;
+      }
+      .image-display {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 10px;
+      }
+      #table-container {
+        margin-top: 20px;
+        overflow: auto;
+        max-height: 400px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 8px;
+        border: 1px solid #ddd;
+      }
+      th.sticky,
+      td.sticky {
+        position: sticky;
+        background: #f9f9f9;
+      }
+      th.sticky {
+        top: 0;
+      }
+      td.sticky {
+        left: 0;
+      }
+      .highlight-yes {
+        background-color: lightgreen;
+      }
+      .highlight-no {
+        background-color: lightcoral;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Table Toggle with Conditional Images and Column Removal</h2>
+
+    <!-- Table Selector -->
+    <ul class="table-list">
+      <li data-file="/Public/Tables/MIG-1.html">MIG-1</li>
+      <li data-file="/Public/Tables/MIG-2.html">MIG-2</li>
+      <li data-file="/Public/Tables/MIG-3.html">MIG-3</li>
+      <li data-file="/Public/Tables/MIG-4.html">MIG-4</li>
+      <li data-file="/Public/Tables/MIG-5.html">MIG-5</li>
+      <li data-file="/Public/Tables/MIG-6.html">MIG-6</li>
+    </ul>
+
+    <!-- Column Toggle Checkboxes -->
+    <div id="column-select">
+      <h3>Select Columns to Display:</h3>
+      <div id="column-checkboxes"></div>
+    </div>
+
+    <!-- Conditional Images -->
+    <div class="image-display">
+      <img
+        id="image1"
+        src="/Public/Thumbnails/grey.png"
+        alt="Placeholder Image 1"
+        width="50"
+      />
+      <img
+        id="image2"
+        src="/Public/Thumbnails/grey.png"
+        alt="Placeholder Image 2"
+        width="50"
+      />
+      <img
+        id="image3"
+        src="/Public/Thumbnails/grey.png"
+        alt="Placeholder Image 3"
+        width="50"
+      />
+    </div>
+
+    <!-- Table Container -->
+    <div id="table-container"></div>
+
+    <script>
+      document.querySelectorAll(".table-list li").forEach((item) => {
+        item.addEventListener("click", function () {
+          document
+            .querySelectorAll(".table-list li")
+            .forEach((el) => el.classList.remove("selected"));
+          this.classList.add("selected");
+          loadHTMLTable(this.getAttribute("data-file"));
+        });
+      });
+
+      function loadHTMLTable(file) {
+        fetch(file)
+          .then((response) => response.text())
+          .then((data) => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, "text/html");
+            const table = doc.querySelector("table");
+            renameHeaders(table);
+            createColumnCheckboxes(table);
+            applyColumnSelections(table);
+            updateImages(table);
+            highlightCells(table);
+            renderTable(table);
+          });
+      }
+
+      function renameHeaders(table) {
+        const headers = table.querySelectorAll("th");
+        headers.forEach((header) => {
+          if (header.innerText === "Digital T9") header.innerText = "Pump 1";
+          if (header.innerText === "Digital T10") header.innerText = "Pump 2";
+          if (header.innerText === "Reboiler T6") header.innerText = "Reboiler";
+          if (
+            ["Reboiler T7", "Reboiler T8", "Reboiler T9"].includes(
+              header.innerText
+            )
+          ) {
+            header.style.display = "none";
+          }
+        });
+      }
+
+      function createColumnCheckboxes(table) {
+        const headerRow = table.querySelector("tr");
+        const columnCheckboxes = document.getElementById("column-checkboxes");
+        columnCheckboxes.innerHTML = ""; // Clear existing checkboxes
+        Array.from(headerRow.children).forEach((header, index) => {
+          const label = document.createElement("label");
+          label.innerHTML = `<input type="checkbox" data-index="${index}" checked> ${header.innerText}`;
+          label.addEventListener("change", () => applyColumnSelections(table));
+          columnCheckboxes.appendChild(label);
+        });
+      }
+
+      function applyColumnSelections(table) {
+        const selectedIndices = Array.from(
+          document.querySelectorAll("#column-checkboxes input")
+        )
+          .map((checkbox, index) => (checkbox.checked ? index : -1))
+          .filter((index) => index !== -1);
+
+        Array.from(table.rows).forEach((row) => {
+          Array.from(row.cells).forEach((cell, index) => {
+            cell.style.display = selectedIndices.includes(index) ? "" : "none";
+          });
+        });
+      }
+
+      function renderTable(table) {
+        const container = document.getElementById("table-container");
+        container.innerHTML = "";
+        container.appendChild(table);
+      }
+
+      function updateImages(table) {
+        const rows = Array.from(table.querySelectorAll("tr"));
+        let pump1ConditionMet = false,
+          pump2ConditionMet = false,
+          reboilerConditionMet = false;
+
+        for (let row of rows.reverse()) {
+          const cells = Array.from(row.cells);
+          const pump1Cell = cells.find(
+            (cell) => cell.getAttribute("data-header") === "Pump 1"
+          );
+          const pump2Cell = cells.find(
+            (cell) => cell.getAttribute("data-header") === "Pump 2"
+          );
+          const reboilerCell = cells.find(
+            (cell) => cell.getAttribute("data-header") === "Reboiler"
+          );
+
+          if (pump1Cell && pump1Cell.innerText === "Yes")
+            pump1ConditionMet = true;
+          if (pump2Cell && pump2Cell.innerText === "Yes")
+            pump2ConditionMet = true;
+          if (reboilerCell && reboilerCell.innerText === "Yes")
+            reboilerConditionMet = true;
+
+          if (pump1ConditionMet && pump2ConditionMet && reboilerConditionMet)
+            break;
+        }
+
+        document.getElementById("image1").src = pump1ConditionMet
+          ? "/Public/Thumbnails/green.png"
+          : "/Public/Thumbnails/grey.png";
+        document.getElementById("image2").src = pump2ConditionMet
+          ? "/Public/Thumbnails/green.png"
+          : "/Public/Thumbnails/grey.png";
+        document.getElementById("image3").src = reboilerConditionMet
+          ? "/Public/Thumbnails/green.png"
+          : "/Public/Thumbnails/grey.png";
+      }
+
+      function highlightCells(table) {
+        table.querySelectorAll("td").forEach((cell) => {
+          if (cell.innerText === "Yes") cell.classList.add("highlight-yes");
+          if (cell.innerText === "No") cell.classList.add("highlight-no");
+        });
+      }
+    </script>
+  </body>
+</html>

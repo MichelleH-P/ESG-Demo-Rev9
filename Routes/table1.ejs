@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4x5 Table</title>
+  </head>
+  <body>
+    <br />
+    <h1>Dummy Table</h1>
+    <h2>Random 4x5 Table</h2>
+
+    <table id="dummy">
+      <tr>
+        <th>Header 1</th>
+        <th>Header 2</th>
+        <th>Header 3</th>
+        <th>Header 4</th>
+        <th>Header 5</th>
+      </tr>
+      <tr>
+        <td>500</td>
+        <td>24</td>
+        <td>3</td>
+        <td>18</td>
+        <td>7</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>12</td>
+        <td>29</td>
+        <td>9</td>
+        <td>15</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>14</td>
+        <td>17</td>
+        <td>6</td>
+        <td>23</td>
+      </tr>
+      <tr>
+        <td>21</td>
+        <td>4</td>
+        <td>19</td>
+        <td>11</td>
+        <td>16</td>
+      </tr>
+    </table>
+    <br />
+
+    <script>
+      window.onload = function () {
+        // Automatically send the table data when the page loads
+        const table = document.getElementById("data-table");
+        const rows = table.querySelectorAll("tbody tr");
+        const tableData = [];
+
+        rows.forEach((row) => {
+          const cells = row.querySelectorAll("td");
+          tableData.push({
+            id: cells[0].innerText,
+            name: cells[1].innerText,
+            status: cells[2].innerText,
+          });
+        });
+
+        // Call the function to pass table data to the PDF generation
+        passTableData(tableData);
+      };
+    </script>
+
+    <script src="/Routes/epadata.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js.map"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.es.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script>
+    <script src="/Routes/epapdf.js"></script>
+  </body>
+</html>

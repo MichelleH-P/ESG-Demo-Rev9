@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Documentation</title>
+    <link rel="stylesheet" type="text/css" href="/Public/Assets/main menu.css" />
+
+    <style>
+      /* Basic styling */
+      img {
+        width: 500px; /* picture size */
+        border-radius: 10px; /* circular border radius */
+        /* float: left; / place image next to text */
+        margin-right: 10px; /* create space after image */
+      } /* reference image */
+
+      .img1 {
+        width: 500px; /* picture size */
+        border-radius: 10px; /* circular boarder radius */
+        float: left; /* place image next to text */
+        margin-right: 100px; /* create space after image */
+        margin-left: 100px; /* create space before image */
+      } /* reference image */
+      p.title {
+        font-family: Arial, sans-serif;
+        font-weight: bold; /* bold font only for p user class */
+        margin-top:20px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 42px;
+        font-weight: bold;
+      }
+
+      /* Basic styling */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0px;
+        
+        /* margin-left: auto; */
+        /* margin-right: auto; */
+        /* justify-content: center */
+        /* background-color: #f4f4f4; */
+      }
+
+      .centered {
+        margin: 0;
+        text-align: center;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      select {
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        color: rgb(0, 0, 0);
+        background-color: rgb(247, 247, 247);
+      }
+
+      .content {
+        /* padding: 20px; */
+        background-color: white;
+        /* border: 1px solid #ddd; */
+        /* border-radius: 5px;
+        margin-bottom: 50px;
+        border-radius: 5px; */
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        text-align: center;
+      }
+
+      .bottom-dropdown {
+        margin-top: 50px;
+        padding: 20px;
+        background-color: #e8e8e8;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        bottom: 20px;
+        width: 100%;
+        left: 0;
+        box-sizing: border-box;
+        text-align: center;
+      }
+
+    /* Table styling */
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f4f4f4;
+    }
+
+        /* Hover effect for the tabs */
+        .tab-bar button:hover {
+          background-color: #cceccc;
+      }
+      
+      input[type="text"], textarea, select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    /* Initial button style */
+    .styled-button {
+      background-color: #28a745; /* Green background */
+      color: white; /* White text */
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease; /* Smooth transition */
+    }
+    
+    /* Hover effect */
+    .styled-button:hover {
+        background-color: #6c757d; /* Gray background on hover */
+    }
+    </style>
+  </head>
+  <body>
+    <div class="banner"></div>
+      <img src="../public/Thumbnails/logo.png" alt="image unavailable" />
+      <nav>
+        <ul>
+          <li><a href="/users/dashboard">Dashboard</a></li>
+          <li><a href="/users/epadata">EPA Data</a></li>
+          <li><a href="/users/esgmodules">ESG Module</a></li>
+          <li><a href="/users/documentation" class="active">Documentation</a></li>
+          <li><a href="/users/runstatus">Run Status</a></li>
+          <li><form action="/users/logout" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" style="align-items: left; padding: 10px 10px; font-weight: bold;">Log out</button>
+           </form></li>
+        </ul>
+      </nav>
+    </div>
+
+    <p class="title">Documentation Generation</p>
+    <br />
+
+    <p class="centered">Please fill in the form to create a customized EPA Report</p>
+    <br />
+
+    <form id="dataForm" style="float: left; height: 500px; width: 30%; margin-left: 15%;">
+      <!-- User Name -->
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Name (required)" required /><br /><br />
+
+      <!-- Company name (optional) -->
+      <label for="company">Company:</label>
+      <input type="text" id="company" name="company" placeholder="Company" /><br /><br />
+
+      <!-- Photo Upload (optional) -->
+      <label for="photo">Upload Photo:</label>
+      <input type="file" id="photo" accept="image/*" /><br /><br />
+
+      <!-- User timezone -->
+      <label for="timezone">Time Zone:</label>
+      <select id="timezone" name="timezone" required>
+        <option value="" disabled selected>Select your time zone (required)</option>
+        <option value="UTC-12:00">UTC-12:00</option>
+        <option value="UTC-11:00">UTC-11:00</option>
+        <option value="UTC-10:00">UTC-10:00</option>
+        <option value="UTC-09:00">UTC-09:00</option>
+        <option value="UTC-08:00">UTC-08:00</option>
+        <option value="UTC-07:00">UTC-07:00</option>
+        <option value="UTC-06:00">UTC-06:00</option>
+        <option value="UTC-05:00">UTC-05:00 (Eastern Time)</option>
+        <option value="UTC-04:00">UTC-04:00 (Atlantic Time)</option>
+        <option value="UTC-03:00">UTC-03:00</option>
+        <option value="UTC-02:00">UTC-02:00</option>
+        <option value="UTC-01:00">UTC-01:00</option>
+        <option value="UTC+00:00">UTC+00:00 (GMT)</option>
+        <option value="UTC+01:00">UTC+01:00</option>
+        <option value="UTC+02:00">UTC+02:00</option>
+        <option value="UTC+03:00">UTC+03:00</option>
+        <option value="UTC+04:00">UTC+04:00</option>
+        <option value="UTC+05:00">UTC+05:00</option>
+        <option value="UTC+06:00">UTC+06:00</option>
+        <option value="UTC+07:00">UTC+07:00</option>
+        <option value="UTC+08:00">UTC+08:00</option>
+        <option value="UTC+09:00">UTC+09:00</option>
+        <option value="UTC+10:00">UTC+10:00</option>
+        <option value="UTC+11:00">UTC+11:00</option>
+        <option value="UTC+12:00">UTC+12:00</option></select
+      ><br /><br />
+
+      <!-- Scrollable List for Unit Name/Number -->
+      <label for="unitname">Select a Unit</label>
+      <select id="unitname" name="unitname" multiple>
+        <option value="MIG-1">MIG-1</option>
+        <option value="MIG-2">MIG-2</option>
+        <option value="MIG-3">MIG-3</option>
+        <option value="MIG-4">MIG-4</option>
+        <option value="MIG-5">MIG-5</option></select
+      ><br /><br />
+
+      <!-- Dropdown List for Unit Name/Number -->
+      <label for="tableOptions">Select the Unit Table:</label>
+      <select id="tableOptions">
+        <option value="../Public/Tables/MIG-1.html">MIG-1</option>
+        <option value="../Public/Tables/MIG-2.html">MIG-2</option>
+        <option value="../Public/Tables/MIG-3.html">MIG-3</option>
+        <option value="../Public/Tables/MIG-4.html">MIG-4</option>
+        <option value="../Public/Tables/MIG-5.html">MIG-5</option></select
+      ><br /><br />
+
+      <button type="button" id="submitBtn" class="styled-button">Create PDF</button>
+      <!-- Print error message here if the table name and table selected do not match -->
+      <p id="errorMessage" style="color: red; display: none">
+        Selected table name and path do not match.
+      </p>
+    </form>
+
+    <!-- Divider holds the table preview -->
+    <div id="preview">
+      <h3>Table Preview:</h3>
+      <iframe id="tablePreview" style="width: 35%; height: 500px; margin-left: 10px" src=""></iframe>
+    </div>
+
+    <!-- Load the external pages into iframes -->
+    <iframe id="page1" src="/Public/Tables/MIG-1.html" style="display: none"></iframe>
+    <iframe id="page2" src="/Public/Tables/MIG-2.html" style="display: none"></iframe>
+    <iframe id="page3" src="/Public/Tables/MIG-3.html" style="display: none"></iframe>
+    <iframe id="page4" src="/Public/Tables/MIG-4.html" style="display: none"></iframe>
+    <iframe id="page5" src="/Public/Tables/MIG-5.html" style="display: none"></iframe>
+
+    <!-- Load the table preview into the divider -->
+    <script>
+      document
+        .getElementById("tableOptions")
+        .addEventListener("change", function () {
+          const selectedTable = this.value;
+          document.getElementById("tablePreview").src = selectedTable;
+        });
+
+      document
+        .getElementById("tableForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const name = document.getElementById("name").value;
+          const selectedTable = document.getElementById("tableOptions").value;
+          handleSubmit8(name, selectedTable);
+        });
+    </script>
+
+    <!-- Print an error message if the table and table name do not mach -->
+    <script>
+      document
+        .getElementById("submitBtn")
+        .addEventListener("click", function () {
+          const tableName = document.getElementById("unitname").value;
+          const tablePath = document.getElementById("tableOptions").value;
+          const pathName = tablePath.split("/").pop().replace(".html", ""); // Extracts MIG-X from the path
+          const errorMessage = document.getElementById("errorMessage");
+
+          // Ensure the table and table name match for the selected unit
+          if (tableName !== pathName) {
+            errorMessage.style.display = "block";
+          } else {
+            // Call to the function that will process the form data
+            errorMessage.style.display = "none";
+            handleSubmit8();
+            alert("Table and path match! Form submitted.");
+          }
+        });
+    </script>
+
+    <!-- Container to display the tables -->
+    <div id="displayTables"></div>
+
+    <script src="/Routes/epadata.js"></script>
+    <script src="/Routes/epapdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.18/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+    
+  </body>
+</html>

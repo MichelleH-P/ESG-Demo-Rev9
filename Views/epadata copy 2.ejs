@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>ESG Module</title>
+    <link rel="stylesheet" type="text/css" href="/Public/Assets/main menu.css" />
+
+    <style>
+      /* Basic styling */
+      img {
+        width: 500px; /* picture size */
+        border-radius: 10px; /* circular border radius */
+        /* float: left; / place image next to text */
+        margin-right: 10px; /* create space after image */
+      } /* reference image */
+
+      .img1 {
+        width: 500px; /* picture size */
+        border-radius: 10px; /* circular boarder radius */
+        float: left; /* place image next to text */
+        margin-right: 100px; /* create space after image */
+        margin-left: 100px; /* create space before image */
+      } /* reference image */
+      p.title {
+        font-family: Arial, sans-serif;
+        font-weight: bold; /* bold font only for p user class */
+        margin-top:20px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 42px;
+        font-weight: bold;
+      }
+
+      /* Basic styling */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0px;
+        
+        /* margin-left: auto; */
+        /* margin-right: auto; */
+        /* justify-content: center */
+        /* background-color: #f4f4f4; */
+      }
+
+      /* Sidebar Styling */
+      .table-list {
+        list-style: none;
+        padding: 0;
+        margin-left: 2%;
+        width: 15%;
+        float: left;
+      }
+      .table-list li {
+        padding: 10px;
+        cursor: pointer;
+        background-color: #f4f4f4;
+      }
+      .table-list li:hover {
+        background-color: rgb(211, 211, 211);
+      }
+      .table-list li.selected {
+        background-color: green;
+        color: white;
+      }
+
+      /* Table Styling */
+      .table-container {
+        max-height: 400px;
+        overflow: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 8px;
+        border: 1px solid #ddd;
+      }
+      th.sticky,
+      td.sticky-col {
+        position: sticky;
+        background: #fff;
+        z-index: 1;
+      }
+      th.sticky {
+        top: 0;
+      }
+      td.sticky-col {
+        left: 0;
+        background: #f0f0f0;
+      }
+
+      /* Alarm Highlighting */
+      .highlight-yellow {
+        background-color: yellow;
+      }
+
+      /* Styling for the table container and display */
+      .table-container {
+        width: 70%;
+        height: 800px;
+        overflow: auto;
+        margin-top: 20px;
+        overflow-y: auto;
+        float: right;
+        margin-right: 5%;
+      }
+      .imageContainer {
+        margin-left: 2%;
+        width: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner"></div>
+      <img src="../public/Thumbnails/logo.png" alt="image unavailable" />
+      <nav>
+        <ul>
+          <li><a href="/users/dashboard">Dashboard</a></li>
+          <li><a href="/users/epadata" class="active">EPA Data</a></li>
+          <li><a href="/users/esgmodules">ESG Module</a></li>
+          <li><a href="/users/documentation">Documentation</a></li>
+          <li><a href="/users/runstatus">Run Status</a></li>
+          <li><form action="/users/logout" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" style="align-items: left; padding: 10px 10px; font-weight: bold;">Log out</button>
+           </form></li>
+        </ul>
+      </nav>
+    </div>
+
+    <p class="title">EPA Data</p>
+
+    <div class="text-align: left; float: left; margin-left: 5%">
+      <h2>Select a Unit:</h2>
+    </div>
+    <ul class="table-list">
+      <li data-table="MIG-1">MIG-1</li>
+      <li data-table="MIG-2">MIG-2</li>
+      <li data-table="MIG-3">MIG-3</li>
+      <li data-table="MIG-4">MIG-4</li>
+      <li data-table="MIG-5">MIG-5</li>
+      <li data-table="MIG-6">MIG-6</li>
+    </ul>
+
+    <div id="image-container" style="float: left; margin-left: 30%">
+      <h3>Pump 1</h3>
+      <img
+        id="pump1Alarm-image"
+        src="/Public/Thumbnails/grey.png"
+        alt="Alarm Image"
+        class="imageContainer"
+      />
+    </div>
+    <div id="image-container" style="float: left; margin-left: 2%">
+      <h3>Pump 2</h3>
+      <img
+        id="pump2Alarm-image"
+        src="/Public/Thumbnails/grey.png"
+        alt="Alarm Image"
+        class="imageContainer"
+      />
+    </div>
+    <div id="image-container" style="float: left; margin-left: 2%">
+      <h3>Bypass</h3>
+      <img
+        id="bypassAlarm-image"
+        src="/Public/Thumbnails/grey.png"
+        alt="Alarm Image"
+        class="imageContainer"
+      />
+    </div>
+
+    <div id="table-container" class="table-container"></div>
+
+    <script>
+      document.querySelectorAll(".table-list li").forEach((item) => {
+        item.addEventListener("click", function () {
+          document
+            .querySelectorAll(".table-list li")
+            .forEach((el) => el.classList.remove("selected"));
+          this.classList.add("selected");
+          const tableId = this.getAttribute("data-table");
+
+          // Load CSV data and display corresponding image
+          loadTable(`/Public/Tables/${tableId}.csv`);
+        });
+      });
+
+      function loadTable(csvPath) {
+        fetch(csvPath)
+          .then((response) => response.text())
+          .then((data) => {
+            const rows = data
+              .trim()
+              .split("\n")
+              .map((row) => row.split(","));
+            const table = document.createElement("table");
+            let lastAlarm = "";
+
+            rows.forEach((row, rowIndex) => {
+              const tr = document.createElement("tr");
+              row.forEach((cell, cellIndex) => {
+                const cellElem = document.createElement(
+                  rowIndex === 0 ? "th" : "td"
+                );
+                cellElem.textContent = cell;
+
+                // Sticky headers and first column
+                if (rowIndex === 0) cellElem.classList.add("sticky");
+                if (cellIndex === 0) cellElem.classList.add("sticky-col");
+
+                // Highlight TK-900 Low Level Alarm
+                if (cell === "TK-900 Low Level Alarm") {
+                  cellElem.classList.add("highlight-yellow");
+                  lastAlarm = "TK-900 Low Level Alarm";
+                } else if (
+                  cell === "BTEX Skid Bypass Alarm" &&
+                  lastAlarm !== "Customer ESD Contact Alarm"
+                ) {
+                  lastAlarm = "BTEX Skid Bypass Alarm";
+                } else if (
+                  cell === "Pump P-903 ON" &&
+                  lastAlarm !== "Customer ESD Contact Alarm"
+                ) {
+                  lastAlarm = "Pump P-903 ON";
+                } else if (cell === "Customer ESD Contact Alarm") {
+                  lastAlarm = "Customer ESD Contact Alarm";
+                }
+                tr.appendChild(cellElem);
+              });
+              table.appendChild(tr);
+            });
+
+            document.getElementById("table-container").innerHTML = "";
+            document.getElementById("table-container").appendChild(table);
+
+            // Change image based on the last alarm
+            const pump1Alarm = document.getElementById("pump1Alarm-image");
+            const pump2Alarm = document.getElementById("pump2Alarm-image");
+            const bypassAlarm = document.getElementById("bypassAlarm-image");
+
+            // Display the correct image based on the last alarm
+            const alarmImage = document.getElementById("alarm-image");
+            if (lastAlarm === "Pump P-903 ON") {
+              pump1Alarm.src = "/Public/Thumbnails/green.png";
+            } else {
+              pump1Alarm.src = "/Public/Thumbnails/grey.png";
+            }
+
+            if (lastAlarm === "BTEX Skid Bypass Alarm") {
+              bypassAlarm.src = "/Public/Thumbnails/red.png";
+            } else {
+              bypassAlarm.src = "/Public/Thumbnails/grey.png";
+            }
+          });
+      }
+    </script>
+  </body>
+</html>

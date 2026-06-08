@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Run Status</title>
+    <link rel="stylesheet" type="text/css" href="/Public/Assets/main menu.css" />
+    <style>
+      /* Basic styling */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        /* background-color: #f4f4f4; */
+      }
+
+      h1 {
+        color: #333;
+      }
+      /* Basic styling */
+      img {
+        width: 500px; /* picture size */
+        border-radius: 10px; /* circular border radius */
+        /* float: left; / place image next to text */
+        margin-right: 10px; /* create space after image */
+      } /* reference image */
+      p.title {
+        font-family: Arial, sans-serif;
+        font-weight: bold; /* bold font only for p user class */
+        margin-top:20px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 42px;
+        font-weight: bold;
+      }
+      .table-list {
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+        margin: 20px;
+        float: left;
+        margin-left: 2%;
+        list-style: none;
+      }
+      .table-list li {
+        padding: 10px;
+        cursor: pointer;
+        background-color: #f4f4f4;
+        margin-bottom: 5px;
+      }
+      .table-list li:hover {
+        background-color: grey;
+      }
+      .table-list li.selected {
+        background-color: green;
+        color: white;
+      }
+      #table-container {
+        width: 80%;
+        height: 800px;
+        overflow: auto;
+        border: 1px solid #ccc;
+        margin-top: 20px;
+        overflow-y: auto;
+        float: right;
+        margin-right: 5%;
+        margin-bottom: 10px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+      th {
+        position: sticky;
+        top: 0;
+        background-color: #f0f0f0;
+        z-index: 1;
+      }
+      td.sticky {
+        position: sticky;
+        left: 0;
+        background-color: white;
+        border-right: 1px solid #ddd;
+        z-index: 1;
+      }
+      td:nth-child(2),
+      th:nth-child(2) {
+        left: 100px;
+      }
+      .highlight-yes {
+        color: whitesmoke;
+        background-color: #04aa6d;
+      }
+      .highlight-no {
+        background-color: lightcoral;
+      }
+      .wide-column {
+        min-width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner"></div>
+      <img src="../public/Thumbnails/logo.png" alt="image unavailable" />
+      <nav>
+        <ul>
+          <li><a href="/users/dashboard">Dashboard</a></li>
+          <li><a href="/users/epadata">EPA Data</a></li>
+          <li><a href="/users/esgmodules">ESG Module</a></li>
+          <li><a href="/users/documentation">Documentation</a></li>
+          <li><a href="/users/runstatus" class="active">Run Status</a></li>
+          <li><form action="/users/logout" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" style="align-items: left; padding: 10px 10px; font-weight: bold;">Log out</button>
+           </form></li>
+        </ul>
+      </nav>
+    </div>
+
+    <p class="title" style="float:center;">Run Status</p>
+
+    <!-- Table Selector -->
+    <ul class="table-list">
+      <li data-file="/Public/Tables/MIG-1.html">MIG-1</li>
+      <li data-file="/Public/Tables/MIG-2.html">MIG-2</li>
+      <li data-file="/Public/Tables/MIG-3.html">MIG-3</li>
+      <li data-file="/Public/Tables/MIG-4.html">MIG-4</li>
+      <li data-file="/Public/Tables/MIG-5.html">MIG-5</li>
+      <li data-file="/Public/Tables/MIG-6.html">MIG-6</li>
+    </ul>
+
+    <!-- Conditional Images -->
+    <div style="float: left; margin-left: 30%;">
+      <h3>Pump 1</h3>
+      <img
+        id="image1"
+        src="/Public/Thumbnails/grey.png"
+        alt="Placeholder Image 1"
+        style="width: 60px; height: 60px; margin-left: 5%;"
+      />
+    </div>
+    <div style="float: left; margin-left: 2%;">
+      <h3>Pump 2</h3>
+      <img
+        id="image2"
+        src="/Public/Thumbnails/grey.png"
+        alt="Placeholder Image 2"
+        style="width: 60px; height: 60px; margin-left: 5%;"
+      />
+    </div>
+    <div style="float: left; margin-left: 2%;">
+      <h3>Reboiler</h3>
+      <img
+        id="image3"
+        src="/Public/Thumbnails/grey.png"
+        style="width: 60px; height: 60px; margin-left: 5%;"
+      />
+    </div>
+    <div style="float: left; margin-left: 2%;">
+      <h3>Combustor</h3>
+      <img
+        id="image4"
+        src="/Public/Thumbnails/grey.png"
+        style="width: 60px; height: 60px; margin-left: 5%;"
+      />
+    </div>
+    
+
+    <!-- Table Container -->
+    <div id="table-container" class="table-container"></div>
+
+    <!-- Column Toggle Checkboxes -->
+    <div id="column-select" style="justify-content: center; float: left; margin-right: 10%; margin-left: 10%;">
+      <h3>Select Columns to Display:</h3>
+      <div id="column-checkboxes"></div>
+    </div>
+
+    <script>
+      // select all list items (<li>) inside .table-list
+      document.querySelectorAll(".table-list li").forEach((item) => {
+        // add an event listener to each item
+        item.addEventListener("click", function () {
+          document
+            // When an item is clicked, it removes the selected class from all list items, 
+            // ensuring only the clicked item is marked as selected.
+            .querySelectorAll(".table-list li")
+            .forEach((el) => el.classList.remove("selected"));
+            // add the selected class to the clicked item to visually indicate selection
+          this.classList.add("selected");
+          // call the loadHTMLTable function with the data-file attribute of the selected item to load the corresponding table.
+          loadHTMLTable(this.getAttribute("data-file"));
+        });
+      });
+
+      // Retrieve the selected table
+      function loadHTMLTable(file) {
+        fetch(file)
+          .then((response) => response.text())
+          .then((data) => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, "text/html");
+            const table = doc.querySelector("table");
+            // Rename the headers
+            renameHeaders(table);
+            // Allow the user to select/unselect columns to add and remove from the table
+            createColumnCheckboxes(table);
+            // Remove the unselected table column arrays
+            applyColumnSelections(table);
+            // Update the run status images
+            updateImages(table);
+            // Highlight yes/no cells and ensure the first row and 2 columns stick
+            highlightCells(table);
+            // Render the table in the preview window
+            renderTable(table);
+          });
+      }
+
+      // Rename the headers
+      function renameHeaders(table) {
+        const headers = table.querySelectorAll("th");
+        headers.forEach((header) => {
+          if (header.innerText === "Digital T9") header.innerText = "Pump 1";
+          if (header.innerText === "Digital T10") header.innerText = "Pump 2";
+          if (header.innerText === "Digital T14") header.innerText = "Fan 1";
+          if (header.innerText === "Digital T15") header.innerText = "Fan 2";
+          if (header.innerText === "Digital T16") header.innerText = "Fan 3";
+          if (header.innerText === "Digital T17") header.innerText = "Fan 4";
+          if (header.innerText === "Digital T18") header.innerText = "Fan 5";
+          if (header.innerText === "Digital T19") header.innerText = "Fan 6";
+          if (header.innerText === "Reboiler T1") header.innerText = "Reboiler";
+          if (header.innerText === "Reboiler T5") header.innerText = "Combustor";
+        });
+      }
+
+      // Allow the user to select/unselect columns to add and remove from the table
+      function createColumnCheckboxes(table) {
+        const headerRow = table.querySelector("tr");
+        const columnCheckboxes = document.getElementById("column-checkboxes");
+        columnCheckboxes.innerHTML = ""; // Clear existing checkboxes
+        // Selected column arrays from the table
+        Array.from(headerRow.children).forEach((header, index) => {
+          const label = document.createElement("label");
+          // Print the interactive table column selection
+          label.innerHTML = `<input type="checkbox" data-index="${index}" checked> ${header.innerText}`;
+          // Make the table column selection reactive
+          label.addEventListener("change", () => applyColumnSelections(table));
+          columnCheckboxes.appendChild(label);
+        });
+      }
+
+      // Remove the unselected table column arrays
+      function applyColumnSelections(table) {
+        // Create an array of the selected table columns
+        const selectedIndices = Array.from(
+          document.querySelectorAll("#column-checkboxes input")
+        )
+        // Array method creates a new table array by iterating over each original array element and applying a function to each element.  
+        .map((checkbox, index) => (checkbox.checked ? index : -1))
+        // New table array from an existing array, containing only the elements that are checkboxed.
+        .filter((index) => index !== -1);
+
+        // Control visibility of a table cell based on whether its index is included in the selectedIndices array.
+        // Convert all rows in table into an array and loop through them.
+        Array.from(table.rows).forEach((row) => {
+          Array.from(row.cells).forEach((cell, index) => {
+            // Check if the cell’s index (index) is included in selectedIndices with (? :) if else
+            cell.style.display = selectedIndices.includes(index) ? "" : "none";
+          });
+        });
+      }
+
+      // Render the table in the preview window
+      function renderTable(table) {
+        const container = document.getElementById("table-container");
+        container.innerHTML = "";
+        container.appendChild(table);
+      }
+
+      // Update the run status images
+      function updateImages(table) {
+        // Inititialize the run status conditions
+        const rows = Array.from(table.querySelectorAll("tr"));
+        let pump1ConditionMet = false,
+          pump2ConditionMet = false,
+          reboilerConditionMet = false,
+          combustorConditionMet = false;
+
+        // Define the columns in which the conditions apply
+        for (let row of rows.reverse()) {
+          const cells = Array.from(row.cells);
+          const pump1Cell = cells.find(
+            (cell) => cell.getAttribute("data-header") === "Pump 1"
+          );
+          const pump2Cell = cells.find(
+            (cell) => cell.getAttribute("data-header") === "Pump 2"
+          );
+          const reboilerCell = cells.find(
+            (cell) => cell.getAttribute("data-header") === "Reboiler"
+          );
+          const combustorCell = cells.find(
+            (cell) => cell.getAttribute("data-header") === "Combustor"
+          );
+
+          // Change condition to true if the condition is met
+          if (pump1Cell && pump1Cell.innerText === "Yes")
+            pump1ConditionMet = true;
+          if (pump2Cell && pump2Cell.innerText === "Yes")
+            pump2ConditionMet = true;
+          if (reboilerCell && reboilerCell.innerText === "Yes")
+            reboilerConditionMet = true;
+          if (combustorCell && combustorCell.innerText === "Yes")
+            combustorConditionMet = true;
+
+          if (pump1ConditionMet && pump2ConditionMet && reboilerConditionMet && combustorConditionMet)
+            break;
+        }
+
+        // Display the corresponding images for the run statuses
+        document.getElementById("image1").src = pump1ConditionMet
+          ? "/Public/Thumbnails/green.png"
+          : "/Public/Thumbnails/red.png";
+        document.getElementById("image2").src = pump2ConditionMet
+          ? "/Public/Thumbnails/green.png"
+          : "/Public/Thumbnails/red.png";
+        document.getElementById("image3").src = reboilerConditionMet
+          ? "/Public/Thumbnails/green.png"
+          : "/Public/Thumbnails/red.png";
+        document.getElementById("image4").src = combustorConditionMet
+          ? "/Public/Thumbnails/green.png"
+          : "/Public/Thumbnails/red.png";
+      }
+
+      // Highlight yes/no cells and ensure the first row and 2 columns stick
+      function highlightCells(table) {
+        // Set sticky properties for the first row and columns
+        table.querySelectorAll("tr").forEach((row, index) => {
+          // Stick the first row
+          if (index === 0) {
+            row
+              .querySelectorAll("th")
+              .forEach((cell) => cell.classList.add("sticky"));
+          }
+          // Stick the first two columns
+          row.cells[0]?.classList.add("wide-column", "sticky");
+          row.cells[1]?.classList.add("wide-column", "sticky");
+        });
+
+        // Highlight cells with "Yes" and "No"
+        table.querySelectorAll("td").forEach((cell) => {
+          if (cell.innerText === "Yes") cell.classList.add("highlight-yes");
+          if (cell.innerText === "No") cell.classList.add("highlight-no");
+        });
+      }
+    </script>
+  </body>
+</html>

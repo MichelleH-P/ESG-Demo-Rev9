@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/Public/Assets/main menu.css" />
+    <link href= "/Public/assets/main menu.css" rel="stylesheet" type="text/css" />
+    <!-- <script defer src="/js/auth.js"></script> -->
+    <!-- <script defer src="/init.js"></script> -->
+
+    <style>
+        /* Basic styling */
+        img {
+          width: 500px; /* picture size */
+          border-radius: 10px; /* circular border radius */
+          /* float: left; / place image next to text */
+          margin-right: 2%; /* create space after image */
+        } /* reference image */
+  
+        p.title {
+          font-family: Arial, sans-serif;
+          font-weight: bold; /* bold font only for p user class */
+          margin-top:20px;
+          margin-bottom: 20px;
+          text-align: center;
+          font-size: 42px;
+          font-weight: bold;
+        }
+  
+        /* Basic styling */
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0px;
+          /* background-color: #f4f4f4; */
+        }
+  
+        h1 {
+          color: #333;
+        }
+  
+        select {
+          padding: 10px;
+          font-size: 16px;
+          margin-bottom: 20px;
+        }
+
+      form {
+          margin: 20px;
+      }
+
+      label {
+          font-weight: bold;
+          display: block;
+          margin-bottom: 5px;
+      }
+
+      input[type="text"], textarea, select {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 16px;
+      }
+
+      select[multiple] {
+          height: 150px; /* Height for scrollable list */
+      }
+
+      /* Style for the main content area */
+      .content {
+        flex: 1; /* Takes up the remaining space */
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* Style for the tab bar at the bottom */
+    .tab-bar {
+
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        background-color: #333;
+    }
+
+    /* Style for each tab */
+    .tab-bar button {
+        flex: 1;
+        padding: 14px 20px;
+        color: black;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        outline: none;
+        transition: background-color 0.3s;
+    }
+
+    /* Hover effect for the tabs */
+    .tab-bar button:hover {
+        background-color: #575757;
+    }
+
+    /* Active tab style */
+    .tab-bar button.active {
+        background-color: #4CAF50;
+    }
+
+    /* Style for the tab content sections */
+    .tab-content {
+        display: none;
+        text-align: left;
+    }
+
+    /* Display the active tab content */
+    .tab-content.active {
+        display: block;
+    }
+        /* Initial button style */
+        .styled-button {
+          background-color: #28a745; /* Green background */
+          color: white; /* White text */
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 16px;
+          transition: background-color 0.3s ease; /* Smooth transition */
+      }
+      
+      /* Hover effect */
+      .styled-button:hover {
+          background-color: #6c757d; /* Gray background on hover */
+      }
+      </style>
+  </head>
+
+  <body>
+    <div class="banner"></div>
+      <img src="../Public/Thumbnails/logo.png" alt="image unavailable" />
+
+      <nav>
+        <ul>
+          <li><a href="/users/dashboard"class="active">Dashboard</a></li>
+          <li><a href="/users/epadata">EPA Data</a></li>
+          <li><a href="/users/esgmodules">ESG Module</a></li>
+          <li><a href="/users/documentation">Documentation</a></li>
+          <li><a href="/users/runstatus">Run Status</a></li>
+          <!-- <li><a href="/users/logout" method="POST">Log Out</a></li> -->
+          <li><form action="/users/logout" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" style="align-items: left; padding: 10px 10px; font-weight: bold;">Log out</button>
+           </form></li>
+        </ul>
+      </nav>
+    </div>
+
+    <br>
+    <p class="title">ESG.Cloud Dashbaord</p>
+    <br>
+
+    <!-- Map container -->
+    <img src="../Public/Thumbnails/map.png" style="width: 25%; height: 25%; float:left; margin-left: 10%; margin-right: 2%;" alt="map unavailable" />
+
+
+    <form action="/submit" method="POST" style="float: left; margin-left: 2%;"></form>
+      <!-- Scrollable List for Unit Name/Number -->
+      <label for="unit-list">Select a Unit to Edit</label>
+      <select id="unit-list" name="unit-list[]" style="float: left; height: 500px; width: 15%; margin-right: 2%;" multiple>
+          <option value="MIG-1">MIG-1</option>
+          <option value="MIG-2">MIG-2</option>
+          <option value="MIG-3">MIG-3</option>
+          <option value="MIG-4">MIG-4</option>
+          <option value="MIG-5">MIG-5</option>
+          <option value="MIG-5">MIG-6</option>
+      </select>
+
+     </form>
+
+    <form action="/submit" method="POST"></form>
+
+      <!-- Alias Field -->
+      <label for="alias">Alias:</label>
+      <input type="text" id="alias" name="alias" style="width: 500px; padding: 5px 5px;" required>
+  
+      <!-- Location Field -->
+      <label for="location">Location:</label>
+      <input type="text" id="location" name="location" style="width: 500px; padding: 5px 5px;" required>
+  
+      <!-- Description Field -->
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" rows="4" style="width: 500px; padding: 5px 5px;" required></textarea>
+  
+      <!-- Unit Number Field -->
+      <label for="unit-number">Unit Number:</label>
+      <input type="text" id="unit-number" name="unit-number" style="width: 500px; padding: 5px 5px;" required>
+
+      <br>
+      <!-- Submit Button -->
+      <button type="submit" class="styled-button">Submit</button>
+  </form>
+
+  <form action="/submit" method="POST"></form>
+      Upload Company Logo: <input type="file" name="doc">
+      <br>
+      <input type="checkbox" name="no_upload">
+      Delete without uploading
+      <br>
+      <!-- Upload Status:  -->
+      <br>
+  
+    <!-- Dropdown for Time Zone -->
+    <label for="timezone">Time Zone:</label>
+    <select id="timezone" name="timezone" style="width: 20%;" required>
+        <option value="" disabled selected>Select your time zone</option>
+        <option value="UTC-12:00">UTC-12:00</option>
+        <option value="UTC-11:00">UTC-11:00</option>
+        <option value="UTC-10:00">UTC-10:00</option>
+        <option value="UTC-09:00">UTC-09:00</option>
+        <option value="UTC-08:00">UTC-08:00</option>
+        <option value="UTC-07:00">UTC-07:00</option>
+        <option value="UTC-06:00">UTC-06:00</option>
+        <option value="UTC-05:00">UTC-05:00 (Eastern Time)</option>
+        <option value="UTC-04:00">UTC-04:00 (Atlantic Time)</option>
+        <option value="UTC-03:00">UTC-03:00</option>
+        <option value="UTC-02:00">UTC-02:00</option>
+        <option value="UTC-01:00">UTC-01:00</option>
+        <option value="UTC+00:00">UTC+00:00 (GMT)</option>
+        <option value="UTC+01:00">UTC+01:00</option>
+        <option value="UTC+02:00">UTC+02:00</option>
+        <option value="UTC+03:00">UTC+03:00</option>
+        <option value="UTC+04:00">UTC+04:00</option>
+        <option value="UTC+05:00">UTC+05:00</option>
+        <option value="UTC+06:00">UTC+06:00</option>
+        <option value="UTC+07:00">UTC+07:00</option>
+        <option value="UTC+08:00">UTC+08:00</option>
+        <option value="UTC+09:00">UTC+09:00</option>
+        <option value="UTC+10:00">UTC+10:00</option>
+        <option value="UTC+11:00">UTC+11:00</option>
+        <option value="UTC+12:00">UTC+12:00</option>
+    </select>
+  </form>
+
+<br />
+<br />
+<br />
+
+<!-- Horizontal navigation tab bar at the bottom -->
+<div class="tab-bar">
+  <button onclick="openTab('tab1')">QR Code</button>
+  <button onclick="openTab('tab2')">Temperature</button>
+  <button onclick="openTab('tab3')">Analog Inputs</button>
+  <button onclick="openTab('tab4')">Digital Inputs</button>
+  <button onclick="openTab('tab5')" class="active">EMITT</button>
+</div>
+
+<br/>
+
+  <script>
+    // Function to open a specific tab
+    function openTab(tabId) {
+        // Get all tab contents and hide them
+        var contents = document.querySelectorAll('.tab-content');
+        contents.forEach(content => content.classList.remove('active'));
+
+        // Get all buttons and remove the active class
+        var buttons = document.querySelectorAll('.tab-bar button');
+        buttons.forEach(button => button.classList.remove('active'));
+
+        // Show the clicked tab content and make the button active
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+      }
+    </script>
+
+    <!-- Main content area where tab content is displayed -->
+<div class="content">
+  <div id="tab1" class="tab-content" style="margin-left: 20%; max-width: 40%; min-width: 200px;">
+      <form action="document_upload_test.php" method="POST" enctype="multipart/form-data">
+        Unit Serial Number:
+        <input type="text" value="" size="10" maxlength="10" name="serial_number">
+        <br>
+        Customer:
+        <select name="cust_id">
+                  <option value="SPXC000" selected="">SpiralX</option>
+                  <option value="ENG">Engineering</option>
+                  <option value="DemoSite">Demo Site</option>
+        </select>
+        <br>
+        Label: <input type="text" name="label" size="40">
+        <br>
+        Location: <input type="text" id="location" name="location" value="" size="43">
+        <br>
+        File: <input type="file" name="doc">
+        <br>
+        <br>
+        <input type="submit" name="update" value="Upload">
+        <input type="checkbox" name="no_upload">
+        Delete without uploading
+        <br>
+        Upload Status: 
+        <br>
+        <br>
+
+        <button type="submit" class="styled-button">Submit</button>
+      </form>  
+  
+</div>
+  <div id="tab2" class="tab-content">
+      <h2>Tab 1 Content</h2>
+      <p>This is the content for Tab 1.</p>
+  </div>
+  <div id="tab3" class="tab-content">
+      <h2 style="float: left; margin-left: 10px;">Real QR Code Source</h2>
+
+      <div style="float: left; margin-left: 10px; width: 100%; height: 500px;">
+        <iframe 
+            src="https://btexeliminator.net/document_upload_test.php" 
+            width="100%" 
+            height="800px" 
+            style="border:none;">
+        </iframe>
+    </div>
+  </div>
+  <div id="tab4" class="tab-content">
+      <h2>Tab 3 Content</h2>
+      <p>This is the content for Tab 3.</p>
+  </div>
+  <div id="tab5" class="tab-content active" style="margin-left: 20%; max-width: 40%; min-width: 200px;">
+    <form action="/submit" method="POST"></form>
+
+      <!-- Alias Field -->
+      <label for="alias">VOC #/hr:</label>
+      <input type="text" id="alias" name="alias" required>
+  
+      <!-- Dropdown for Time Zone -->
+    <label for="timezone">Type:</label>
+    <select id="timezone" name="timezone" required>
+        <option value="" disabled selected>Select your time zone</option>
+        <option value="UTC-12:00">UTC-12:00</option>
+        <option value="UTC-11:00">UTC-11:00</option>
+        <option value="UTC-10:00">UTC-10:00</option>
+        <option value="UTC-09:00">UTC-09:00</option>
+        <option value="UTC-08:00">UTC-08:00</option>
+        <option value="UTC-07:00">UTC-07:00</option>
+    </select>
+
+    <!-- Dropdown for Time Zone -->
+    <label for="timezone">Emission Tracking Type:</label>
+    <select id="timezone" name="timezone" required>
+          <option value="" disabled selected>Select your time zone</option>
+          <option value="UTC-12:00">UTC-12:00</option>
+          <option value="UTC-11:00">UTC-11:00</option>
+          <option value="UTC-10:00">UTC-10:00</option>
+          <option value="UTC-09:00">UTC-09:00</option>
+          <option value="UTC-08:00">UTC-08:00</option>
+          <option value="UTC-07:00">UTC-07:00</option>
+    </select>
+
+    <!-- Dropdown for Time Zone -->
+    <label for="timezone">Primary:</label>
+    <select id="timezone" name="timezone" required>
+        <option value="" disabled selected>Select your time zone</option>
+        <option value="UTC-12:00">UTC-12:00</option>
+        <option value="UTC-11:00">UTC-11:00</option>
+        <option value="UTC-10:00">UTC-10:00</option>
+        <option value="UTC-09:00">UTC-09:00</option>
+        <option value="UTC-08:00">UTC-08:00</option>
+        <option value="UTC-07:00">UTC-07:00</option>
+    </select>
+
+      <!-- Location Field -->
+      <label for="location">Mfg Link:</label>
+      <input type="text" id="location" name="location" required>
+  
+      <!-- Description Field -->
+      <label for="description">EMITT ID:</label>
+      <textarea id="description" name="description" rows="4" required></textarea>
+  
+      <!-- Unit Number Field -->
+      <label for="unit-number">Unit Number:</label>
+      <input type="text" id="unit-number" name="unit-number" required>
+
+      <!-- Upload Document -->
+      <label for="document">Emission Simulation Document:</label>
+      <input type="submit" name="document" value="Upload">
+      <br>
+      <label for="no_upload">No Upload</label>
+      <input type="checkbox" name="no_upload">
+  
+      <br>
+      <br>
+
+      <!-- Submit Button -->
+      <button type="submit" class="styled-button">Submit</button>
+  </form>
+
+  
+</div>
+</div>
+  </body>
+</html>
