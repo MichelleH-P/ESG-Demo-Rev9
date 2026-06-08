@@ -1,0 +1,99 @@
+
+/* Reset some basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Navigation bar container */
+  nav {
+    background-color: #333; /* Dark background */
+    height: 48px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 0px;
+    position: sticky; /* Sticks to the top */
+    top: 0;
+
+  }
+  
+  /* Logo styling */
+  nav .logo {
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  /* Navigation menu */
+  nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-right: 100px; /* create space after image */
+  }
+  
+  nav ul li {
+    margin: 0 15px;
+  }
+  
+  /* Navigation links */
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 14px 20px;
+    transition: 0.3s;
+  }
+  
+  /* Hover effect for links */
+  nav ul li a:hover {
+    background-color: #575757;
+    color: white;
+  }
+  
+  /* Active link */
+  nav ul li a.active {
+    background-color: #04AA6D; /* Highlight active link */
+    color: white;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    nav ul {
+      position: absolute;
+      top: 60px;
+      left: -100%;
+      width: 100%;
+      background-color: #333;
+      flex-direction: column;
+      align-items: center;
+      transition: left 0.3s ease;
+    }
+  
+    nav ul.active {
+      left: 0;
+    }
+  
+    nav ul li {
+      margin: 15px 0;
+    }
+  
+    .menu-toggle {
+      background-color: inherit;
+        color: white;
+        padding: 14px 20px;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 17px;
+        font-weight: bold;
+    }
+  }
+  
+  .menu-toggle {
+    display: none;
+  }
+  

@@ -1,0 +1,176 @@
+﻿Record,Date,UTC Time,Alarms
+1,1/4/2023,22:43:31,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+2,1/5/2023,22:43:36,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+3,1/6/2023,22:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+4,1/7/2023,23:43:54,Pump P-903 ON
+5,1/8/2023,0:43:54,BTEX Skid Bypass Alarm
+6,1/9/2023,1:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+7,1/10/2023,2:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+12,1/10/2023,7:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+8,1/11/2023,3:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+13,1/11/2023,8:43:54,Pump P-903 ON
+9,1/12/2023,4:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+14,1/12/2023,9:43:54,BTEX Skid Bypass Alarm
+10,1/13/2023,5:43:54,Pump P-903 ON
+15,1/13/2023,10:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+11,1/14/2023,6:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+16,1/14/2023,11:43:54,Pump P-903 ON
+26,1/15/2023,21:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+27,1/15/2023,22:43:54,Pump P-903 ON
+28,1/15/2023,23:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+29,1/15/2023,0:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+30,1/15/2023,1:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+31,1/16/2023,2:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+32,1/17/2023,3:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+33,1/18/2023,4:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+34,1/19/2023,5:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+35,1/20/2023,6:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+36,1/21/2023,7:43:54,Pump P-903 ON
+37,1/22/2023,8:43:54,BTEX Skid Bypass Alarm
+38,1/23/2023,9:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+39,1/24/2023,10:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+40,1/25/2023,11:43:54,Pump P-903 ON
+17,1/26/2023,12:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+41,1/26/2023,12:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+18,1/27/2023,13:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+42,1/27/2023,13:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+19,1/28/2023,14:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+43,1/28/2023,14:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+20,1/29/2023,15:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+44,1/29/2023,15:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+21,1/30/2023,16:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+45,1/30/2023,16:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+22,1/31/2023,17:43:54,Pump P-903 ON
+23,1/31/2023,18:43:54,BTEX Skid Bypass Alarm
+24,1/31/2023,19:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+25,1/31/2023,20:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+46,1/31/2023,17:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+78,2/1/2023,1:43:54,BTEX Skid Bypass Alarm
+79,2/2/2023,2:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+80,2/3/2023,3:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+81,2/4/2023,4:43:54,Pump P-903 ON
+82,2/5/2023,5:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+83,2/6/2023,6:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+84,2/7/2023,7:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+85,2/8/2023,8:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+86,2/9/2023,9:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+87,2/10/2023,10:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+88,2/11/2023,11:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+89,2/12/2023,12:43:54,Pump P-903 ON
+90,2/13/2023,13:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+91,2/14/2023,14:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+92,2/15/2023,15:43:54,Pump P-903 ON
+93,2/16/2023,16:43:54,BTEX Skid Bypass Alarm
+94,2/17/2023,17:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+95,2/18/2023,18:43:54,Pump P-903 ON
+96,2/19/2023,19:43:54,BTEX Skid Bypass Alarm
+97,2/20/2023,20:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+98,2/20/2023,21:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+99,2/20/2023,22:43:54,Pump P-903 ON
+100,2/20/2023,23:43:54,Pump P-903 ON
+101,2/20/2023,0:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+102,2/20/2023,1:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+47,2/25/2023,18:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+48,2/26/2023,19:43:54,Pump P-903 ON
+103,2/26/2023,2:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+49,2/27/2023,20:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+104,2/27/2023,3:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+50,2/28/2023,21:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+105,2/28/2023,4:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+51,3/1/2023,22:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+106,3/1/2023,5:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+52,3/2/2023,23:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+107,3/2/2023,6:43:54,Pump P-903 ON
+108,3/2/2023,7:43:54,BTEX Skid Bypass Alarm
+109,3/2/2023,8:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+110,3/2/2023,9:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+53,3/3/2023,0:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+54,3/4/2023,1:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+55,3/5/2023,2:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+56,3/6/2023,3:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+111,3/6/2023,10:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+57,3/7/2023,4:43:54,Pump P-903 ON
+112,3/7/2023,11:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+58,3/8/2023,5:43:54,BTEX Skid Bypass Alarm
+113,3/8/2023,12:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+59,3/9/2023,6:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+60,3/9/2023,7:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+61,3/9/2023,8:43:54,Pump P-903 ON
+62,3/9/2023,9:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+63,3/9/2023,10:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+64,3/9/2023,11:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+65,3/9/2023,12:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+66,3/9/2023,13:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+114,3/9/2023,13:43:54,BTEX Skid Bypass Alarm
+115,3/10/2023,14:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+116,3/11/2023,15:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+117,3/12/2023,16:43:54,Pump P-903 ON
+118,3/13/2023,17:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+119,3/14/2023,18:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+120,3/15/2023,19:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+121,3/16/2023,20:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+67,3/17/2023,14:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+122,3/17/2023,21:43:54,Pump P-903 ON
+68,3/18/2023,15:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+123,3/18/2023,22:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+69,3/19/2023,16:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+124,3/19/2023,23:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+70,3/20/2023,17:43:54,Pump P-903 ON
+125,3/20/2023,0:43:54,Pump P-903 ON
+71,3/21/2023,18:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+126,3/21/2023,1:43:54,Pump P-903 ON
+72,3/22/2023,19:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+127,3/22/2023,2:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+73,3/23/2023,20:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+128,3/23/2023,3:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+74,3/24/2023,21:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+129,3/24/2023,4:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+75,3/25/2023,22:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+130,3/25/2023,5:43:54,Pump P-903 ON
+76,3/26/2023,23:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+131,3/26/2023,6:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+77,3/27/2023,0:43:54,Pump P-903 ON
+132,3/27/2023,7:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+133,3/28/2023,8:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+134,3/29/2023,9:43:54,Pump P-903 ON
+135,3/30/2023,10:43:54,BTEX Skid Bypass Alarm
+136,3/31/2023,11:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+137,4/1/2023,12:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+138,4/2/2023,13:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+139,4/3/2023,14:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+140,4/4/2023,15:43:54,Pump P-903 ON
+141,4/5/2023,16:43:54,BTEX Skid Bypass Alarm
+142,4/6/2023,17:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+143,4/7/2023,18:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+144,4/8/2023,19:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+145,4/9/2023,20:43:54,Pump P-903 ON
+146,4/10/2023,21:43:54,Pump P-903 ON
+147,4/11/2023,22:43:54,BTEX Skid Bypass Alarm
+148,4/12/2023,23:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+149,4/13/2023,0:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+150,4/14/2023,1:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+151,4/15/2023,2:43:54,Pump P-903 ON
+152,4/16/2023,3:43:54,BTEX Skid Bypass Alarm
+153,4/17/2023,4:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+154,4/18/2023,5:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+155,4/19/2023,6:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+156,4/20/2023,7:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+157,4/21/2023,8:43:54,Pump P-903 ON
+158,4/21/2023,9:43:54,BTEX Skid Bypass Alarm
+159,4/21/2023,10:43:54,Pump P-903 ON
+160,4/21/2023,11:43:54,BTEX Skid Bypass Alarm
+161,4/21/2023,12:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+162,4/21/2023,13:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+163,4/21/2023,14:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+164,4/21/2023,15:43:54,Pump P-903 ON
+165,4/21/2023,16:43:54,BTEX Skid Bypass Alarm
+166,4/21/2023,17:43:54,Pump P-903 ON
+167,4/28/2023,18:43:54,BTEX Skid Bypass Alarm
+168,4/28/2023,19:43:54,BTEX Skid Bypass Alarm
+169,4/28/2023,20:43:54,Customer ESD Contact Alarm                                                                                                                                                                                                                                    
+170,4/30/2023,21:43:54,TK-900 Low Level Alarm                                                                                                                                                                                                                                        
+171,4/30/2023,22:43:54,Pump P-904 ON                                                                                                                                                                                                                                                 
+172,5/30/2024,23:43:54,Pump P-903 ON
+173,5/30/2024,0:43:54,BTEX Skid Bypass Alarm
+174,5/30/2024,1:43:54,Pump P-903 ON
+175,5/30/2024,2:43:54,BTEX Skid Bypass Alarm
